@@ -1,0 +1,29 @@
+{
+  "type": "session.update",
+  "session": {
+    "type": "realtime",
+    "model": "gpt-realtime",
+    "output_modalities": ["audio"],
+    "instructions": "<paste the system prompt from references/system-prompt.md>",
+    "audio": {
+      "input": {
+        "format": { "type": "audio/pcm", "rate": 24000 },
+        "transcription": {
+          "model": "gpt-4o-transcribe",
+          "language": "en"
+        },
+        "turn_detection": {
+          "type": "semantic_vad",
+          "eagerness": "low",
+          "create_response": true,
+          "interrupt_response": true
+        }
+      },
+      "output": {
+        "format": { "type": "audio/pcm", "rate": 24000 },
+        "voice": "marin",
+        "speed": 1.0
+      }
+    }
+  }
+}
