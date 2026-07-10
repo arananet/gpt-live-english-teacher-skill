@@ -50,14 +50,22 @@ recap at the end. Two full worked dialogues are in
 
 ## Quick start
 
-**On GPT-Live (available now in ChatGPT Voice; GPT-Live-1 is the default
-model for Go/Plus/Pro, GPT-Live-1 mini for Free):** supply the
-[system prompt](references/system-prompt.md) as the session's instructions,
-then just start talking: *"I want to practice my English by talking to you —
-please correct me whenever I make a mistake."*
+### No code, no API — just the ChatGPT app (recommended)
 
-**On the API (until GPT-Live-1 ships there — OpenAI has a notify-me
-sign-up):**
+The GPT-Live API is **not open yet**, but you don't need it: GPT-Live-1
+already powers ChatGPT Voice (default for Go/Plus/Pro; GPT-Live-1 mini for
+Free).
+
+1. Copy the [system prompt](references/system-prompt.md) — or paste the
+   entire [`SKILL.md`](SKILL.md), that works too.
+2. Paste it as the first message of a new chat in the ChatGPT app (or into
+   **Settings → Personalization → Custom Instructions** to make it
+   permanent).
+3. Switch to **Voice mode** and start talking: *"I want to practice my
+   English by talking to you — please correct me whenever I make a
+   mistake."*
+
+### On the API (developer builds, until GPT-Live-1 ships there — OpenAI has a notify-me sign-up)
 
 1. Open a [Realtime API](https://developers.openai.com/api/docs/guides/realtime)
    connection (WebRTC in the browser, WebSocket server-side).

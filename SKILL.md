@@ -55,12 +55,15 @@ background; that's fine for the occasional "explain the rule in depth"
 request, but corrections themselves must come from the live model — never
 make the learner wait.
 
-**Availability:** GPT-Live-1 powers ChatGPT Voice today (default for Go,
-Plus, and Pro; mini for Free), so the fastest deployment is ChatGPT Voice
-with the [system prompt](references/system-prompt.md) supplied as the
-session's instructions. API access is announced but not yet shipped — until
-it lands, developer builds use the fallback below and swap the model id
-later.
+**Availability — no API needed:** GPT-Live-1 powers ChatGPT Voice today
+(default for Go, Plus, and Pro; mini for Free), and the GPT-Live API is
+**not open yet** (announced, with a notify-me sign-up). So the way to use
+this skill on GPT-Live right now is simply the ChatGPT app: paste the
+[system prompt](references/system-prompt.md) — or this entire SKILL.md —
+into a new chat (or into Settings → Personalization → Custom Instructions
+to make it permanent), then switch to Voice mode and start talking. No API
+key, no code. Developer builds use the fallback below until the API opens,
+then swap the model id.
 
 ### API fallback: `gpt-realtime` on the Realtime API
 

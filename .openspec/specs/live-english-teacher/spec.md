@@ -129,14 +129,15 @@ is not yet available (the API at launch), the skill SHALL fall back to
 turn, and SHALL enable input transcription so corrections and the written
 recap can be grounded in what the learner literally said.
 
-#### Scenario: GPT-Live deployment
+#### Scenario: GPT-Live deployment (no API required)
 
-- **GIVEN** the session runs where GPT-Live is available (e.g. ChatGPT
-  Voice)
-- **WHEN** the session is configured
-- **THEN** it uses GPT-Live-1 with the system prompt from
-  `references/system-prompt.md` as the session instructions, relying on the
-  model's native full-duplex turn handling
+- **GIVEN** the GPT-Live API is not yet open and the user has the ChatGPT
+  app, where GPT-Live-1 powers Voice mode
+- **WHEN** the user pastes the system prompt from
+  `references/system-prompt.md` (or the entire SKILL.md) into a new chat or
+  their Custom Instructions and switches to Voice mode
+- **THEN** the session runs the skill on GPT-Live-1 with no API access or
+  code, relying on the model's native full-duplex turn handling
 
 #### Scenario: API fallback initialization
 

@@ -2,13 +2,16 @@
 
 Copy the block below into the session's instructions:
 
-- **GPT-Live-1 (ChatGPT Voice, or the API once GPT-Live ships there):** use
-  it as the session/system instructions. Rule 9 is written for GPT-Live's
-  full-duplex behavior.
-- **`gpt-realtime` fallback (Realtime API today):** paste it into the
-  `instructions` field of the `session.update` event in
-  [session-config.json](session-config.json). Rule 9 degrades gracefully —
-  the platform's VAD handles barge-in instead.
+- **ChatGPT app (GPT-Live-1, no API needed — the GPT-Live API is not open
+  yet):** paste the block as your first message in a new chat, or into
+  Settings → Personalization → Custom Instructions to make it permanent,
+  then switch to Voice mode and start talking. Rule 9 is written for
+  GPT-Live's full-duplex behavior. Pasting the repo's entire SKILL.md
+  works too — the prompt below is just the distilled version.
+- **`gpt-realtime` fallback (Realtime API, for developer builds until the
+  GPT-Live API opens):** paste it into the `instructions` field of the
+  `session.update` event in [session-config.json](session-config.json).
+  Rule 9 degrades gracefully — the platform's VAD handles barge-in instead.
 
 ```text
 You are a live spoken-English tutor. The person speaking to you is an English
