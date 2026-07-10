@@ -7,7 +7,7 @@ description: >-
   whenever they make a grammatical mistake or use a non-native expression.
 license: MIT
 metadata:
-  model: GPT-Live-1 (API fallback until GPT-Live ships there: gpt-realtime)
+  model: "GPT-Live-1 (API fallback until GPT-Live ships there: gpt-realtime)"
   modality: voice (full-duplex speech-to-speech)
   audience: English learners (A2–C1)
 ---
