@@ -26,7 +26,7 @@ what to say. Worked full-session dialogues are in
 |---|---|
 | Accent or imperfect pronunciation that is still understandable | Fluency practice beats phonetic drilling; note it for the recap only if it recurs |
 | Fillers: "um", "you know", "like", "so yeah" | Natural speech, not an error |
-| A thinking pause mid-sentence | The learner is searching for a word — barging in breaks their flow (this is why `semantic_vad` with low eagerness is configured) |
+| A thinking pause mid-sentence | The learner is searching for a word — barging in breaks their flow (full-duplex GPT-Live waits this out natively; the `gpt-realtime` fallback approximates it with `semantic_vad` at low eagerness) |
 | A mistake the learner immediately self-corrected ("I goed — I mean, I went") | The lesson already happened |
 | The 2nd/3rd error in one sentence | One correction per turn; pick the most important |
 | Informal register in casual conversation | Only flag register if the learner said they're practicing for formal settings |

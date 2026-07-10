@@ -1,4 +1,5 @@
 {
+  "_comment": "API fallback config. GPT-Live-1 is the skill's target model but is not yet available in the API; until it is, run the Realtime API with gpt-realtime as below. When GPT-Live-1 ships in the API, retarget the session to it and drop the turn_detection tuning — full-duplex GPT-Live times its own interruptions.",
   "type": "session.update",
   "session": {
     "type": "realtime",

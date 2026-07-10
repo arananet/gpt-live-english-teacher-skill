@@ -3,9 +3,9 @@
 ## Purpose
 
 Define the required behavior of the live English teacher skill: a voice
-tutor on `gpt-realtime` that lets a learner speak freely and corrects
-grammatical mistakes and non-native expressions immediately, gently, and
-briefly.
+tutor on OpenAI's GPT-Live full-duplex models that lets a learner speak
+freely and corrects grammatical mistakes and non-native expressions
+immediately, gently, and briefly.
 
 ## Requirements
 
@@ -117,17 +117,54 @@ channel is available.
 - **THEN** it compliments something specific and recaps up to three
   corrections worth remembering
 
-### Requirement: Realtime runtime configuration
+### Requirement: Live model runtime configuration
 
-The skill SHALL run on the `gpt-realtime` model with semantic voice-activity
-detection (`semantic_vad`, low eagerness) so thinking pauses are not treated
-as end of turn, and SHALL enable input transcription so corrections and the
-written recap can be grounded in what the learner literally said.
+The skill SHALL target OpenAI's full-duplex GPT-Live model family
+(GPT-Live-1; GPT-Live-1 mini where cost requires) wherever GPT-Live is
+available on the deployment surface, because mid-utterance correction
+depends on a model that listens while speaking. On surfaces where GPT-Live
+is not yet available (the API at launch), the skill SHALL fall back to
+`gpt-realtime` on the Realtime API with semantic voice-activity detection
+(`semantic_vad`, low eagerness) so thinking pauses are not treated as end of
+turn, and SHALL enable input transcription so corrections and the written
+recap can be grounded in what the learner literally said.
 
-#### Scenario: Session initialization
+#### Scenario: GPT-Live deployment (no API required)
 
-- **GIVEN** a client opens a Realtime API connection
+- **GIVEN** the GPT-Live API is not yet open and the user has the ChatGPT
+  app, where GPT-Live-1 powers Voice mode
+- **WHEN** the user pastes the system prompt from
+  `references/system-prompt.md` (or the entire SKILL.md) into a new chat or
+  their Custom Instructions and switches to Voice mode
+- **THEN** the session runs the skill on GPT-Live-1 with no API access or
+  code, relying on the model's native full-duplex turn handling
+
+#### Scenario: API fallback initialization
+
+- **GIVEN** a client opens a Realtime API connection and GPT-Live is not yet
+  available in the API
 - **WHEN** the session is configured
 - **THEN** it uses model `gpt-realtime`, `semantic_vad` turn detection with
   low eagerness, input transcription enabled, and the system prompt from
   `references/system-prompt.md`
+
+#### Scenario: GPT-Live reaches the API
+
+- **GIVEN** an API deployment currently running the `gpt-realtime` fallback
+- **WHEN** GPT-Live-1 becomes available in the API
+- **THEN** the session is retargeted to GPT-Live-1 and the turn-detection
+  tuning is removed, since full-duplex GPT-Live times its own interruptions
+
+### Requirement: Full-duplex conduct
+
+When running on a full-duplex model, the tutor SHALL deliver corrections the
+instant a flawed phrase ends, MAY backchannel sparingly during long
+stretches of correct speech, and SHALL stop speaking immediately if the
+learner talks over a correction, re-offering it at the next natural pause.
+
+#### Scenario: Learner talks over a correction
+
+- **GIVEN** the tutor has started delivering a correction
+- **WHEN** the learner keeps talking instead of yielding
+- **THEN** the tutor stops mid-sentence and re-offers the correction at the
+  learner's next natural pause
