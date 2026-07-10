@@ -20,9 +20,9 @@ steer the topic, quiz the learner, or turn the session into an interview.
 - **GIVEN** a live voice session has started
 - **WHEN** the learner asks the tutor to listen and jump in immediately on
   any grammatical mistake or non-native expression
-- **THEN** the tutor confirms warmly in one or two sentences (e.g.
-  "Absolutely. I'll keep it gentle and jump in as we go.") and invites the
-  learner to start speaking
+- **THEN** the tutor confirms warmly in one or two sentences (e.g. "Happy
+  to. I'll keep it gentle and jump in as we go.") and invites the learner
+  to start speaking
 
 ### Requirement: Immediate, targeted interruption
 
@@ -33,18 +33,18 @@ confuse a listener. The tutor SHALL limit itself to approximately one
 correction per learner turn, choosing the most important error when several
 occur.
 
-#### Scenario: Verb-form error corrected mid-flow
+#### Scenario: Tense error corrected mid-flow
 
 - **GIVEN** the learner is telling a story
-- **WHEN** they say "I have never went to this city before"
+- **WHEN** they say "Last weekend I go to my cousin's house"
 - **THEN** the tutor interrupts right after the phrase with a soft cue and
-  the fixed sentence ("Tiny tweak — I've never been to this city before.")
-  and immediately returns the floor
+  the fixed sentence ("Tiny tweak — last weekend I went to my cousin's
+  house.") and immediately returns the floor
 
 #### Scenario: Multiple errors in one sentence
 
-- **GIVEN** the learner produces a sentence containing a wrong proper noun
-  and an unnatural expression
+- **GIVEN** the learner says "She gave me a good advices about find a job",
+  which contains both a countability error and a verb-form error
 - **WHEN** the tutor responds
 - **THEN** it corrects only the more important error in that turn
 
@@ -60,6 +60,12 @@ self-corrected.
 - **WHEN** the pause is a thinking pause rather than the end of a thought
 - **THEN** the tutor stays silent and lets the learner finish
 
+#### Scenario: Learner self-corrects
+
+- **GIVEN** the learner says "I goed — I mean, I went"
+- **WHEN** the flawed form has already been fixed by the learner
+- **THEN** the tutor does not interrupt
+
 ### Requirement: Correction style
 
 Corrections SHALL consist of a soft cue followed by the corrected sentence,
@@ -71,11 +77,10 @@ beyond the minimum fix.
 
 #### Scenario: Learner asks why
 
-- **GIVEN** the tutor corrected "excited to this trip" to "excited about
-  this trip"
-- **WHEN** the learner asks "Why not exciting?"
-- **THEN** the tutor answers with a one-breath contrast ("Excited describes
-  how you feel; exciting describes the thing.") and returns the floor
+- **GIVEN** the tutor corrected "I was so boring" to "I was so bored"
+- **WHEN** the learner asks "Why bored and not boring?"
+- **THEN** the tutor answers with a one-breath contrast ("Bored describes
+  how you feel; boring describes the thing.") and returns the floor
 
 #### Scenario: Learner retries successfully
 
@@ -107,7 +112,7 @@ channel is available.
 
 #### Scenario: Learner wraps up
 
-- **GIVEN** the learner says something like "That is my San Francisco plan"
+- **GIVEN** the learner says something like "So that was my weekend"
 - **WHEN** the tutor closes the session
 - **THEN** it compliments something specific and recaps up to three
   corrections worth remembering

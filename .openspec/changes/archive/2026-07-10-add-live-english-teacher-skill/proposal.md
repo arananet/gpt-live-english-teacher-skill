@@ -3,9 +3,8 @@
 ## Why
 
 English learners want conversation practice with immediate, gentle,
-in-flow correction — the behavior demonstrated in the source tutoring
-transcript. No packaged skill existed that pairs that teaching protocol
-with OpenAI's latest live speech model (`gpt-realtime`).
+in-flow correction. No packaged skill existed that pairs that teaching
+protocol with OpenAI's latest live speech model (`gpt-realtime`).
 
 ## What Changes
 
@@ -17,7 +16,7 @@ with OpenAI's latest live speech model (`gpt-realtime`).
   transcription)
 - Add `references/correction-playbook.md` (error type → interrupt? →
   template decision table)
-- Add `examples/transcript-annotated.md` (annotated source transcript)
+- Add `examples/example-sessions.md` (invented worked dialogues, annotated)
 - Add repository docs (`README.md` with badges, `LICENSE`)
 
 ## Impact

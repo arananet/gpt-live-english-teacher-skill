@@ -8,8 +8,8 @@
 tutor jumps in immediately and gently whenever it hears a grammatical
 mistake or a non-native expression, then hands the floor back.
 
-The teaching behavior is specified from a real tutoring transcript
-([examples/transcript-annotated.md](../examples/transcript-annotated.md)).
+Worked example dialogues live in
+[examples/example-sessions.md](../examples/example-sessions.md).
 
 ## Tech Stack
 
@@ -26,7 +26,7 @@ The teaching behavior is specified from a real tutoring transcript
 - `SKILL.md` — entry point; behavior contract and runtime setup
 - `references/` — files loaded on demand: system prompt, session config,
   correction playbook
-- `examples/` — annotated source transcript
+- `examples/` — worked example sessions
 - `.openspec/` — this spec workspace (`specs/` for current truth,
   `changes/` for proposals; archived changes move to `changes/archive/`)
 
@@ -35,6 +35,8 @@ The teaching behavior is specified from a real tutoring transcript
 - Requirements use SHALL and each requirement carries at least one
   `#### Scenario:` in Given/When/Then form
 - Capability names are verb-noun, kebab-case
+- Example dialogue in specs and docs is invented for illustration, not
+  taken from recordings of real sessions
 
 ### Domain notes
 

@@ -9,27 +9,25 @@
 A skill that turns a live voice session on OpenAI's latest realtime speech
 model (**`gpt-realtime`**) into a gentle, always-on English tutor: you talk,
 it listens, and the moment you make a grammatical mistake or use a
-non-native expression it jumps in — *"Tiny tweak — I've never **been** to
-this city before."* — and hands the floor right back.
-
-The teaching behavior is distilled from a real tutoring session
-([annotated transcript](examples/transcript-annotated.md)).
+non-native expression it jumps in — *"Tiny tweak — last weekend I **went**
+to my cousin's house."* — and hands the floor right back.
 
 ## How it works
 
-> **Learner:** I have never went to this city before.
-> **Tutor:** Tiny tweak — *I've never been to this city before.*
-> **Learner:** …so I'm very excited to this trip.
-> **Tutor:** Just a quick fix — *I'm very excited **about** this trip.*
-> **Learner:** Why not *exciting*?
-> **Tutor:** *Excited* describes how you feel; *exciting* describes the
-> thing. You're excited about the exciting trip.
+> **Learner:** Last weekend I go to my cousin's house in the countryside.
+> **Tutor:** Tiny tweak — *last weekend I **went** to my cousin's house.*
+> **Learner:** …and we made a barbecue in the garden.
+> **Tutor:** *We **had** a barbecue* might sound more natural.
+> **Learner:** Why not *made*? We cooked it ourselves.
+> **Tutor:** In English you *have* a barbecue, the same way you *have* a
+> party or *have* dinner. *Make* sounds like you're building the grill.
 
 The tutor interrupts for grammar, wrong prepositions, unnatural word choice,
 and confusing proper nouns — and stays quiet for accent, fillers, thinking
 pauses, and anything you already fixed yourself. About one correction per
 turn, explanations only when you ask, and a ≤3-item *you said → say instead*
-recap at the end.
+recap at the end. Two full worked dialogues are in
+[`examples/example-sessions.md`](examples/example-sessions.md).
 
 ## Repository layout
 
@@ -39,7 +37,7 @@ recap at the end.
 | [`references/system-prompt.md`](references/system-prompt.md) | Drop-in text for `session.instructions` |
 | [`references/session-config.json`](references/session-config.json) | Ready-to-send Realtime API `session.update` payload |
 | [`references/correction-playbook.md`](references/correction-playbook.md) | Error type → interrupt? → template decision table |
-| [`examples/transcript-annotated.md`](examples/transcript-annotated.md) | The source transcript, annotated |
+| [`examples/example-sessions.md`](examples/example-sessions.md) | Worked example sessions, annotated |
 | [`.openspec/`](.openspec/) | OpenSpec workspace: [capability spec](.openspec/specs/live-english-teacher/spec.md) and archived change proposal |
 
 ## Quick start
@@ -51,8 +49,8 @@ recap at the end.
    Key settings: model `gpt-realtime`, `semantic_vad` turn detection with
    **low eagerness** (so thinking pauses aren't treated as end-of-turn), and
    input transcription enabled (so the recap can quote what you actually said).
-3. Start talking: *"Assume that I'm an English learner… whenever you hear
-   any grammatical mistake, jump in immediately to correct me."*
+3. Start talking: *"I want to practice my English by talking to you — please
+   correct me whenever I make a mistake."*
 
 Agent runtimes that support the [Agent Skills](https://code.claude.com/docs/en/skills)
 format can instead drop this repo into their skills directory and let the

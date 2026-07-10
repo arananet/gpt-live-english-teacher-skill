@@ -1,11 +1,11 @@
 # Tasks
 
-## 1. Distill teaching behavior from transcript
+## 1. Define the teaching behavior
 
-- [x] 1.1 Annotate the source transcript with the technique each exchange
-      demonstrates
-- [x] 1.2 Extract interruption rules, non-interruption boundaries,
+- [x] 1.1 Establish interruption rules, non-interruption boundaries,
       correction style, and recap format
+- [x] 1.2 Write invented, annotated example sessions demonstrating each
+      technique (`examples/example-sessions.md`)
 
 ## 2. Author the skill
 
