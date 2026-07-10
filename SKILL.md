@@ -2,13 +2,13 @@
 name: live-english-teacher
 description: >-
   Turn a live voice session into a gentle, always-on English tutor powered by
-  OpenAI's latest realtime speech model (gpt-realtime). Use when a learner
+  OpenAI's GPT-Live full-duplex voice models (GPT-Live-1). Use when a learner
   wants to practice spoken English and be corrected immediately — mid-speech —
   whenever they make a grammatical mistake or use a non-native expression.
 license: MIT
 metadata:
-  model: gpt-realtime
-  modality: voice (speech-to-speech)
+  model: GPT-Live-1 (API fallback until GPT-Live ships there: gpt-realtime)
+  modality: voice (full-duplex speech-to-speech)
   audience: English learners (A2–C1)
 ---
 
@@ -20,8 +20,8 @@ immediately** — but gently — the moment you hear a grammatical mistake or an
 expression a native speaker wouldn't use. Then hand the floor straight back.
 
 This skill defines both the **teaching behavior** (how to correct) and the
-**runtime setup** (how to run it on the `gpt-realtime` model). Worked example
-sessions are in [examples/example-sessions.md](examples/example-sessions.md).
+**runtime setup** (how to run it on GPT-Live). Worked example sessions are in
+[examples/example-sessions.md](examples/example-sessions.md).
 
 ## When to use this skill
 
@@ -31,22 +31,54 @@ sessions are in [examples/example-sessions.md](examples/example-sessions.md).
 - Any live voice session where the stated goal is English practice rather
   than task completion.
 
-## Runtime setup (gpt-realtime)
+## Runtime setup
 
-Run the session on OpenAI's Realtime API with the latest live speech model:
+### Target model: GPT-Live (full-duplex)
 
-- **Model:** `gpt-realtime` (speech-to-speech; use `gpt-realtime-mini` only if
-  cost/latency demands it)
+OpenAI's GPT-Live family (**GPT-Live-1**, and **GPT-Live-1 mini** where cost
+matters) is the intended engine for this skill. GPT-Live is **full-duplex**:
+it listens and speaks at the same time and decides many times per second
+whether to speak, keep listening, pause, or acknowledge — which is precisely
+what "jump in the moment you hear the mistake" requires. It removes the two
+compromises of turn-based voice models:
+
+- **Corrections land instantly.** The tutor can start "Tiny tweak — …" the
+  moment the flawed phrase ends, without waiting for end-of-turn detection.
+- **Thinking pauses are safe.** The model natively waits out a learner
+  searching for a word instead of treating silence as its turn to talk.
+
+Full-duplex also enables **backchanneling** ("mhmm", "yeah") — use it
+sparingly to show you're listening during long stretches of correct speech,
+and stop speaking immediately if the learner talks over a correction.
+GPT-Live delegates harder questions to a frontier reasoning model in the
+background; that's fine for the occasional "explain the rule in depth"
+request, but corrections themselves must come from the live model — never
+make the learner wait.
+
+**Availability:** GPT-Live-1 powers ChatGPT Voice today (default for Go,
+Plus, and Pro; mini for Free), so the fastest deployment is ChatGPT Voice
+with the [system prompt](references/system-prompt.md) supplied as the
+session's instructions. API access is announced but not yet shipped — until
+it lands, developer builds use the fallback below and swap the model id
+later.
+
+### API fallback: `gpt-realtime` on the Realtime API
+
+Until GPT-Live-1 reaches the API, run developer deployments on the Realtime
+API with `gpt-realtime` (half-duplex speech-to-speech):
+
 - **Transport:** WebRTC for browser/mobile clients, WebSocket for server-side
-- **Turn detection:** `semantic_vad` — it waits for the learner to actually
-  finish a thought, which matters because learners pause mid-sentence while
-  searching for words. Do not barge in on a thinking pause.
+- **Turn detection:** `semantic_vad` with **low eagerness** — the closest
+  approximation of GPT-Live's native patience with thinking pauses
 - **Input transcription:** enable it, so corrections can be grounded in what
-  was literally said and a written recap can be produced at the end.
+  was literally said and a written recap can be produced at the end
 
 A ready-to-send `session.update` payload is in
-[references/session-config.json](references/session-config.json), and the full
-system prompt to place in `session.instructions` is in
+[references/session-config.json](references/session-config.json). When
+GPT-Live-1 ships in the API, retarget the session to it and drop the VAD
+tuning — interruption timing becomes the model's job, not the config's.
+
+The system prompt for either deployment is in
 [references/system-prompt.md](references/system-prompt.md).
 
 ## Teaching behavior
@@ -101,6 +133,9 @@ the rest go.
 - **Upgrade beyond the minimum when it helps.** After fixing "I went to the
   market yesterday," you might offer the polish: "You could also say *I
   stopped by the market yesterday.*" Offer, don't insist.
+- **Yield instantly when talked over.** Running full-duplex, if the learner
+  keeps talking through your correction, stop mid-sentence and re-deliver it
+  at their next natural pause instead of competing for the floor.
 
 The full decision table (error type → interrupt? → correction template) is in
 [references/correction-playbook.md](references/correction-playbook.md).

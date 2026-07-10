@@ -4,9 +4,10 @@
 
 `gpt-live-english-teacher-skill` packages a reusable agent skill
 ([SKILL.md](../SKILL.md)) that turns a live voice session on OpenAI's
-`gpt-realtime` model into a spoken-English tutor: the learner talks, the
-tutor jumps in immediately and gently whenever it hears a grammatical
-mistake or a non-native expression, then hands the floor back.
+full-duplex GPT-Live models (GPT-Live-1) into a spoken-English tutor: the
+learner talks, the tutor jumps in immediately and gently whenever it hears
+a grammatical mistake or a non-native expression, then hands the floor
+back.
 
 Worked example dialogues live in
 [examples/example-sessions.md](../examples/example-sessions.md).
@@ -15,8 +16,10 @@ Worked example dialogues live in
 
 - Agent Skills format (`SKILL.md` with YAML frontmatter + progressive
   disclosure into `references/` and `examples/`)
-- OpenAI Realtime API, model `gpt-realtime` (speech-to-speech), configured
-  via `references/session-config.json`
+- OpenAI GPT-Live model family (GPT-Live-1 / GPT-Live-1 mini, full-duplex
+  speech-to-speech); until GPT-Live reaches the API, developer deployments
+  fall back to `gpt-realtime` on the Realtime API, configured via
+  `references/session-config.json`
 - Markdown documentation; no build step, no runtime code in this repo
 
 ## Project Conventions
